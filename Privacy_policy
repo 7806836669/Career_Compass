@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy — Career Compass</title>
+  <style>
+    :root{
+      --bg:#fff7fb;
+      --card:#fff;
+      --text:#222;
+      --muted:#555;
+      --accent:#ff6fa3;
+      --maxw:900px;
+    }
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg, var(--bg), #fff);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .wrap{
+      max-width:var(--maxw);
+      margin:48px auto;
+      padding:28px;
+    }
+    header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .logo{
+      width:64px;height:64px;border-radius:12px;
+      background:radial-gradient(circle at 30% 30%, #ffd9e6 0%, #ffd0e0 20%, #ffb0d0 40%, #ff6fa3 100%);
+      box-shadow:0 4px 20px rgba(255,111,163,0.18);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#fff;font-size:20px;
+    }
+    h1{margin:0;font-size:22px}
+    p.lead{color:var(--muted);margin-top:8px}
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:26px;
+      box-shadow:0 8px 28px rgba(30,30,30,0.06);
+      margin-top:18px;
+      line-height:1.65;
+    }
+    h2{margin-top:18px;color:#111}
+    ul{margin-left:20px}
+    a{color:var(--accent);text-decoration:none}
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+    .muted{color:var(--muted)}
+    .small{font-size:13px;color:var(--muted)}
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;
+      box-shadow:0 6px 18px rgba(255,111,163,0.18);
+      font-weight:600;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">CC</div>
+      <div>
+        <h1>Career Compass — Privacy Policy</h1>
+        <p class="lead">Effective date: <strong>2025-12-06</strong></p>
+      </div>
+    </header>
+
+    <article class="card">
+      <p>
+        <strong>Career Compass</strong> (“we”, “us”, “our”) respects your privacy. This Privacy Policy explains what information we collect, how we use it, and your choices.
+      </p>
+
+      <h2>1. Information we collect</h2>
+      <ul>
+        <li><strong>Account information:</strong> name, email, phone number (used for OTP login), and any profile details you provide.</li>
+        <li><strong>Usage data:</strong> app analytics (screens visited, timestamps) used to improve the app.</li>
+        <li><strong>Device data:</strong> device model, OS version, IP address, and unique device identifiers for security/analytics.</li>
+        <li><strong>Third-party services:</strong> if you use Google/Firebase features, limited data is shared with those providers (see section below).</li>
+      </ul>
+
+      <h2>2. How we use your data</h2>
+      <ul>
+        <li>To provide and maintain our services (authentication, career assessment).</li>
+        <li>To send OTPs for authentication and important notifications.</li>
+        <li>To analyze and improve features and user experience.</li>
+        <li>To comply with legal obligations and to detect/prevent fraud.</li>
+      </ul>
+
+      <h2>3. Data retention</h2>
+      <p class="muted">We retain personal data only as long as necessary to provide the services or as required by law. If you request account deletion, we will remove or anonymize your personal data as described under "Your rights".</p>
+
+      <h2>4. Your rights</h2>
+      <ul>
+        <li><strong>Access & correction:</strong> You can request access to or correction of your personal data.</li>
+        <li><strong>Deletion:</strong> You can request deletion of your account and personal data. Use our <a href="/delete_account.html">Delete Account</a> page or call the API endpoint at:
+          <code>https://api.yourdomain.com/v1/user/delete</code>.
+        </li>
+        <li><strong>Contact:</strong> see footer for contact details.</li>
+      </ul>
+
+      <h2>5. Third-party services</h2>
+      <p class="small">
+        We use third-party providers such as Firebase (Authentication, Analytics), Google Play services, and hosting providers. These providers have their own privacy practices; we only share the minimum required data with them to provide services.
+      </p>
+
+      <h2>6. Security</h2>
+      <p class="small">We use industry-standard security measures (HTTPS, encryption in transit) to protect your data. However, no system is 100% secure; we will notify users of any breach as required by law.</p>
+
+      <h2>7. Children</h2>
+      <p class="small">Our app is intended for students aged 12 and above. We do not knowingly collect personal data from children under the age required by local law without parental consent.</p>
+
+      <h2>8. Changes to this policy</h2>
+      <p class="small">We may update this policy. We will post the updated date at the top and notify users where required.</p>
+
+      <footer>
+        <p>Contact us: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></p>
+        <p class="small">Company: Career Compass — Address: [Your Company Address]</p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>

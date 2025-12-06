@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Delete Account — Career Compass</title>
+  <style>
+    :root {
+      --bg:#fff6f9; --card:#fff; --accent:#ff6fa3; --danger:#e64b6a; --muted:#666;
+      --maxw:620px;
+    }
+    body{
+      margin:0;font-family:Inter,system-ui,Roboto,Arial;
+      background:linear-gradient(180deg,var(--bg),#fff);
+      color:#111;-webkit-font-smoothing:antialiased;
+    }
+    .container{
+      max-width:var(--maxw);margin:48px auto;padding:22px;
+    }
+    h1{margin:0 0 8px 0;font-size:20px}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+    .card{
+      padding:20px;border-radius:12px;background:var(--card);box-shadow:0 12px 36px rgba(0,0,0,0.06)
+    }
+    label{display:block;margin-top:12px;font-weight:600}
+    input[type="text"], input[type="password"]{
+      width:100%;padding:10px;border-radius:10px;border:1px solid #eee;margin-top:6px;
+      box-sizing:border-box;font-size:15px;
+    }
+    .row{display:flex;gap:10px}
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none;border:none;cursor:pointer;
+    }
+    .btn-danger{background:var(--danger);}
+    .note{font-size:13px;color:var(--muted);margin-top:12px}
+    .response{margin-top:14px;padding:12px;border-radius:10px;display:none}
+    .response.success{background:#eafbea;color:#065f46;border:1px solid #bbf7d0;display:block}
+    .response.error{background:#fff0f0;color:#7f1d1d;border:1px solid #fecaca;display:block}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Delete your Career Compass account</h1>
+    <p class="lead">Deleting your account will remove your personal data from our system according to our retention policy. This action is irreversible.</p>
+
+    <div class="card">
+      <form id="deleteForm">
+        <label for="email">Registered email</label>
+        <input id="email" type="text" placeholder="you@example.com" required />
+
+        <label for="token">Authentication token (or session token)</label>
+        <input id="token" type="password" placeholder="Paste your auth token here" required />
+
+        <label for="confirm">
+          <input id="confirm" type="checkbox" />
+          &nbsp;I confirm I want to permanently delete my account.
+        </label>
+
+        <div style="margin-top:14px;">
+          <button class="btn btn-danger" id="deleteBtn" type="button">Delete My Account</button>
+          <a href="/privacy.html" style="margin-left:12px;text-decoration:none;font-weight:600;color:var(--accent)">Privacy Policy</a>
+        </div>
+
+        <div id="respSuccess" class="response success" role="status" aria-live="polite"></div>
+        <div id="respError" class="response error" role="alert" aria-live="assertive"></div>
+
+        <p class="note">Important: This page will send a request to your server endpoint. Make sure the API URL is served over HTTPS and requires authentication (token or other). If your backend expects a POST request instead of DELETE, change the request method (see comments in the script).</p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Replace with your real endpoint
+    const DELETE_API_URL = "https://api.yourdomain.com/v1/user/delete";
+
+    const emailEl = document.getElementById('email');
+    const tokenEl = document.getElementById('token');
+    const confirmEl = document.getElementById('confirm');
+    const deleteBtn = document.getElementById('deleteBtn');
+    const respSuccess = document.getElementById('respSuccess');
+    const respError = document.getElementById('respError');
+
+    function showSuccess(msg){
+      respError.style.display='none';
+      respSuccess.textContent = msg;
+      respSuccess.style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function showError(msg){
+      respSuccess.style.display='none';
+      respError.textContent = msg;
+      respError.style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    deleteBtn.addEventListener('click', async () => {
+      respSuccess.style.display='none'; respError.style.display='none';
+      const email = emailEl.value.trim();
+      const token = tokenEl.value.trim();
+      const confirmed = confirmEl.checked;
+
+      if(!email || !token){
+        showError('Please fill email and authentication token.');
+        return;
+      }
+      if(!confirmed){
+        showError('Please confirm account deletion by checking the box.');
+        return;
+      }
+
+      deleteBtn.disabled = true;
+      deleteBtn.textContent = 'Processing...';
+
+      try {
+        // Example: Sending DELETE with JSON body. Some servers prefer POST for body-bearing requests.
+        const response = await fetch(DELETE_API_URL, {
+          method: 'DELETE',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            // If your API uses bearer token header, uncomment the next line and remove token from body:
+            // 'Authorization': 'Bearer ' + token,
+          },
+          body: JSON.stringify({
+            email: email,
+            token: token,
+            confirm: true
+          })
+        });
+
+        const json = await response.json().catch(()=>({}));
+
+        if(response.ok){
+          showSuccess(json.message || 'Your account deletion request was successful.');
+          // Optionally, you could redirect to homepage after a few seconds:
+          // setTimeout(()=>location.href='/', 3500);
+        } else {
+          const errMsg = json.error || json.message || `Server returned ${response.status}`;
+          showError('Failed to delete account: ' + errMsg);
+        }
+      } catch (err) {
+        showError('Network or CORS error: ' + (err.message || err));
+      } finally {
+        deleteBtn.disabled = false;
+        deleteBtn.textContent = 'Delete My Account';
+      }
+    });
+  </script>
+</body>
+</html>
